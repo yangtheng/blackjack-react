@@ -5,7 +5,7 @@ const DealerCardsDisplay = props => {
   if (!props.waitingForPlayer) {
     cards = props.cards.map((card, index) => <img src={card.image} style={{height: '100px', width: '100px'}} key={index} />)
   } else if (props.waitingForPlayer && props.cards.length > 0) {
-    cards = [<img src={props.cards[0].image} style={{height: '100px', width: '100px'}} key={0} />, <img src='images/back.png' style={{height: '100px', width: '70px', marginLeft: '10px'}} key={1} />]
+    cards = [<img src={props.cards[0].image} style={{height: '100px', width: '100px'}} key={0} />, <img src='images/back.svg' style={{height: '100px', width: '100px'}} key={1} />]
   }
 
   return (
