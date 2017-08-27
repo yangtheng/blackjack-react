@@ -3,6 +3,7 @@ export class Card {
     this.type = type
     this.value = value
     this.suit = suit
+    this.image = `images/${type}${suit}.svg`
   }
 }
 
@@ -84,6 +85,9 @@ export class Player {
     if (amount < 1) {
       alert('Please bet more than $0!')
       return false
+    } else if (amount > this.bankroll) {
+      alert('Please bet less than what you have!')
+      return false
     } else if (amount > 0) {
       this.bankroll -= this.betAmount
       return true
@@ -139,5 +143,7 @@ export class Player {
       this.bankroll += this.betAmount * 2.5
     }
     this.result = result
+    if (this.betAmount > this.bankroll) this.betAmount = this.bankroll
+    if (this.bankroll <= 0) alert('Game over! You are bankrupt!')
   }
 }

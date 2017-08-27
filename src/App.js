@@ -30,7 +30,7 @@ class App extends Component {
 
     if (this.state.player.inGame === false) {
       newGameButton = <button onClick={(e) => this.newGame(e)}>New Game</button>
-      betAmountInput = <p> Set Bet Amount: <input type='number' max={this.state.player.bankroll} min={0} onChange={(e) => this.setBetAmount(e)} /> </p>
+      betAmountInput = <p> Set Bet Amount: <input type='range' value={this.state.player.betAmount} max={this.state.player.bankroll} min={0} onChange={(e) => this.setBetAmount(e)} /> </p>
     } else if (this.state.player.inGame === true) {
       hitButton = <button onClick={(e) => this.playerHit(e)}>Hit</button>
       standButton = <button onClick={(e) => this.playerStand(e)}>Stand</button>
