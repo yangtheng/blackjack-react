@@ -36,6 +36,7 @@ export class Dealer {
   constructor () {
     this.cards = []
     this.value = null
+    this.waitingForPlayer = false
   }
 
   checkValue () {
@@ -52,12 +53,24 @@ export class Dealer {
     }
     return cardValue
   }
+
+  checkBlackjack () {
+    if (this.value === 21 && this.cards.length === 2) {
+      this.value = 'Blackjack!'
+      return true
+    } else return false
+  }
+
+  toggleWaitingForPlayer () {
+    this.waitingForPlayer = !this.waitingForPlayer
+  }
 }
 
 export class Player {
   constructor () {
     this.cards = []
     this.value = null
+    this.result = ''
     this.bankroll = 50000
     this.betAmount = 0
     this.inGame = false
@@ -110,14 +123,21 @@ export class Player {
     return cardValue
   }
 
-  result (result) {
-    if (result === 'lose') {
-      this.betAmount = 0
-    } else if (result === 'win') {
+  checkBlackjack () {
+    if (this.value === 21 && this.cards.length === 2) {
+      this.value = 'Blackjack!'
+      return true
+    } else return false
+  }
+
+  setResult (result) {
+    if (result === 'win') {
       this.bankroll += this.betAmount * 2
-      this.betAmount = 0
     } else if (result === 'push') {
       this.bankroll += this.betAmount
+    } else if (result === 'blackjack') {
+      this.bankroll += this.betAmount * 2.5
     }
+    this.result = result
   }
 }
